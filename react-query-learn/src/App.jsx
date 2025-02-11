@@ -1,10 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
+import { useQuery } from "@tanstack/react-query"
 function App() {
-  const [count, setCount] = useState(0)
+
+  const fetchData = async () => {
+    let data = await fetch("http://localhost:3000/posts");
+    console.log(data)
+  }
+
+   const {data, status}  = useQuery({
+    queryKey : ["posts"],
+    queryFn: fetchData,
+   })
 
   return (
     <>
